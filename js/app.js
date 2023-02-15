@@ -1,128 +1,375 @@
 'use strict';
-/////////////////////////////////////
-/* Problem 1 (this is your demo that we'll solve in class)
-Write a function called sum() that takes in two numbers as arguments and then returns an array where the first element is the sum of those numbers, and the second element is a concatenated string that EXACTLY follows this example and uses the values that were input into the function:
 
-"The sum of 4 and 7 is 11."
+// ********** GLOBAL **************
 
-Test this function by hand in the console to get it working, and when you think it is finished, uncomment the call for the testSum() function below and check the console to see if the test passes.*/
+let hours = ['6am', '7am', '8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm', '7pm'];
 
-// Write your code here
-function sum(a, b) { //eslint-disable-line
+let storeSection = document.getElementById('store-profiles');
 
+console.dir(storeSection);
+
+// ********** HELPER FUNCTIONS *********
+
+function randomCustomerCalc(min,max){ // random number of customers per hour
+//   // got this from MDN docs
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-// Here is the test for sum(); uncomment it to run it
-// testSum(4, 7);
+// ********** OBJECT LITERALS **********
 
-// Once you get the test passing, do an a-c-p cycle and synchronize the code between GitHub and your laptop. Don't forget to create a new branch for your work on the next question!
+let seattle = {
+  name: 'Seattle',
+  minCust: 23,
+  maxCust: 65,
+  avgCookieBought: 6.3,
+  cookiesBought: [],
+  randomCustomer: [],
+  dailyTotal: 0,
+  getCookies: function(min,max){
+    this.cookieNum = `${randomCustomerCalc(23-65)} cookies`;
+    for(let i = 0; i < hours.length; i++){
+      let customer = Math.floor(Math.random() * (max - min + 1) + min);
+      this.randomCustomer.push(customer);
+      console.log(customer);
+    }
+  },
 
-/////////////////////////////////////
-/* Problem 2
-Write a function called multiply() that takes in two numbers as arguments and returns an array where the first element is the product of those numbers, and the second element is a string that EXACTLY follows this example and uses the values that were input into the function:
+  calcTotalCookiePerHour: function(){
+    this.getCookies(this.minCust, this.maxCust);
+    randomCustomerCalc();
+    for(let i = 0; i < hours.length; i++){
+      let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookieBought);
+      this.cookiesBought.push(totalCookie);
+      console.log(this.cookiesBought);
+      this.dailyTotal += totalCookie;
+    }
+    console.log(this.dailyTotal, 'total');
+  },
 
-"The product of 5 and 9 is 45."
+  render: function(){
+    this.calcTotalCookiePerHour();
 
-Test this function by hand in the console to get it working, and when you think it is finished, uncomment the call for the testMultiply() function and see if the test passes.*/
+    // ***** DOM MANIPULATION *****
 
-// Write your code here
-function multiply(a, b) { //eslint-disable-line
+    // create element
+    let articleElem = document.createElement('article');
 
-}
+    // add it to the dom
+    storeSection.appendChild(articleElem);
 
-// Here is the test for multiply(); uncomment it to run it
-// testMultiply(5,9);
+    let h2Elem = document.createElement('h2');
+    h2Elem.textContent = this.name;
+    console.log(h2Elem);
+    articleElem.appendChild(h2Elem);
 
-// Once you get the test passing, do an a-c-p cycle and synchronize the code between GitHub and your laptop. Don't forget to create a new branch for your work on the next question!
+    // USEFUL FOR LAB
+    let ulElem = document.createElement('ul');
+    articleElem.appendChild(ulElem);
 
-/////////////////////////////////////
-/* Problem 3
-Write a function called sumAndMultiply() that takes in three numbers as separate arguments and returns an array where the first element is the sum of those three numbers, the second element is the product of those three numbers,  and the third and fourth elements are strings that EXACTLY follow this example and use the values that were input into the function:
+    for(let i = 0; i < hours.length; i++){
+      let liElem = document.createElement('li');
+      console.log(this.cookieNum);
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
+      ulElem.appendChild(liElem);
+    }
 
-Third element: "4 and 7 and 5 sum to 16."
-Fourth element: "The product of 4 and 7 and 5 is 140."
+    let totalItem = document.createElement('li');
+    console.log();
+    totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
+    ulElem.appendChild(totalItem);
 
-IMPORTANT DETAIL: You may not use the arithmetic operators + and * in this function. To do addition, use your sum() function, and to do multiplication, use your multiply() function that you've already created. You're going to have to be resourceful to figure out how to do this. However, you may continue to use the + operator for string concatenation.
+    let pElem = document.createElement('p');
+    pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
+    articleElem.appendChild(pElem);
+  }
+};
 
-Test this function by hand in the console to get it working, and when you think it is finished, uncomment the call for the testSumAndMultiply() function and see if the test passes.*/
+let tokyo = {
+  name: 'Tokyo',
+  minCust: 3,
+  maxCust: 24,
+  avgCookieBought: 1.2,
+  cookiesBought: [],
+  randomCustomer: [],
+  dailyTotal: 0,
+  getCookies: function(min,max){
+    this.cookieNum = `${randomCustomerCalc(23-65)} cookies`;
+    for(let i = 0; i < hours.length; i++){
+      let customer = Math.floor(Math.random() * (max - min + 1) + min);
+      this.randomCustomer.push(customer);
+      console.log(customer);
+    }
+  },
 
-// Write your code here
-function sumAndMultiply(a, b, c) { //eslint-disable-line
+  calcTotalCookiePerHour: function(){
+    this.getCookies(this.minCust, this.maxCust);
+    randomCustomerCalc();
+    for(let i = 0; i < hours.length; i++){
+      let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookieBought);
+      this.cookiesBought.push(totalCookie);
+      console.log(this.cookiesBought);
+      this.dailyTotal += totalCookie;
+    }
+    console.log(this.dailyTotal, 'total');
+  },
 
-}
+  render: function(){
+    this.calcTotalCookiePerHour();
 
-// Here is the test for sumAndMultiply(); uncomment it to run it
-// testSumAndMultiply(4,7,5);
+    // ***** DOM MANIPULATION *****
 
-// Once you get the test passing, do an a-c-p cycle and synchronize the code between GitHub and your laptop. Don't forget to create a new branch for your work on the next question!
+    // create element
+    let articleElem = document.createElement('article');
 
-/////////////////////////////////////
-/* Problem 4
-Write a function called sumArray() that takes in an array of numbers as its single argument and then returns an array where the first element is the sum of the numbers in the array, and the second element is a string that EXACTLY follows this example and uses the values that were input into the function:
+    // add it to the dom
+    storeSection.appendChild(articleElem);
 
-"2,3,4 was passed in as an array of numbers, and 9 is their sum."
+    let h2Elem = document.createElement('h2');
+    h2Elem.textContent = this.name;
+    console.log(h2Elem);
+    articleElem.appendChild(h2Elem);
 
-IMPORTANT DETAIL: You may not use the arithmetic operator + in this function. To do addition, use your sum() function that you've already created. You're going to have to be resourceful to figure out how to do this. However, you may continue to use the + operator for string concatenation.
+    // USEFUL FOR LAB
+    let ulElem = document.createElement('ul');
+    articleElem.appendChild(ulElem);
 
-Test this function by hand in the console to get it working, and when you think it is finished, uncomment the call for the testSumArray() function and see if the test passes.*/
+    for(let i = 0; i < hours.length; i++){
+      let liElem = document.createElement('li');
+      console.log(this.cookieNum);
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
+      ulElem.appendChild(liElem);
+    }
 
-// Write your code here
-let testArray = [2, 3, 4]; //eslint-disable-line
+    let totalItem = document.createElement('li');
+    console.log();
+    totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
+    ulElem.appendChild(totalItem);
 
-function sumArray(sumArr) { //eslint-disable-line
+    let pElem = document.createElement('p');
+    pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
+    articleElem.appendChild(pElem);
+  }
+};
 
-}
+let dubai = {
+  name: 'Dubai',
+  minCust: 11,
+  maxCust: 38,
+  avgCookieBought: 3.7,
+  cookiesBought: [],
+  randomCustomer: [],
+  dailyTotal: 0,
+  getCookies: function(min,max){
+    this.cookieNum = `${randomCustomerCalc(23-65)} cookies`;
+    for(let i = 0; i < hours.length; i++){
+      let customer = Math.floor(Math.random() * (max - min + 1) + min);
+      this.randomCustomer.push(customer);
+      console.log(customer);
+    }
+  },
 
-// Here is the test for sumArray(); uncomment it to run it
+  calcTotalCookiePerHour: function(){
+    this.getCookies(this.minCust, this.maxCust);
+    randomCustomerCalc();
+    for(let i = 0; i < hours.length; i++){
+      let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookieBought);
+      this.cookiesBought.push(totalCookie);
+      console.log(this.cookiesBought);
+      this.dailyTotal += totalCookie;
+    }
+    console.log(this.dailyTotal, 'total');
+  },
 
-// testSumArray(testArray);
+  render: function(){
+    this.calcTotalCookiePerHour();
 
-// Once you get the test passing, do an a-c-p cycle and synchronize the code between GitHub and your laptop. Don't forget to create a new branch for your work on the next question!
+    // ***** DOM MANIPULATION *****
 
-/////////////////////////////////////
-/* Problem 5
-Write a function called multiplyArray() that takes an array of numbers as its argument and returns an array whose first element is the product of those numbers, and the second element is a string that EXACTLY follows this example and uses the values that were input into the function:
+    // create element
+    let articleElem = document.createElement('article');
 
-"The numbers 2,3,4 have a product of 24."
+    // add it to the dom
+    storeSection.appendChild(articleElem);
 
-IMPORTANT DETAIL: You may not use the arithmetic operator * in this function. To do multiplication, use your multiply() function that you've already created. You're going to have to be resourceful to figure out how to do this. This function should handle an array containing three elements. However, you may continue to use the + operator for string concatenation.
+    let h2Elem = document.createElement('h2');
+    h2Elem.textContent = this.name;
+    console.log(h2Elem);
+    articleElem.appendChild(h2Elem);
 
-Test this function by hand in the console to get it working, and when you think it is finished, uncomment the call for the testMultiplyArray() function and see if the test passes.*/
+    // USEFUL FOR LAB
+    let ulElem = document.createElement('ul');
+    articleElem.appendChild(ulElem);
 
-// Write your code here
-function multiplyArray(multArr) { //eslint-disable-line
+    for(let i = 0; i < hours.length; i++){
+      let liElem = document.createElement('li');
+      console.log(this.cookieNum);
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
+      ulElem.appendChild(liElem);
+    }
 
-}
+    let totalItem = document.createElement('li');
+    console.log();
+    totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
+    ulElem.appendChild(totalItem);
 
-// Here is the test for multiplyArray(); uncomment it to run it
-// testMultiplyArray(testArray);
+    let pElem = document.createElement('p');
+    pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
+    articleElem.appendChild(pElem);
+  }
+};
 
-// Once you get the test passing, do an a-c-p cycle and synchronize the code between GitHub and your laptop. 
+let paris = {
+  name: 'Paris',
+  minCust: 20,
+  maxCust: 38,
+  avgCookieBought: 2.3,
+  cookiesBought: [],
+  randomCustomer: [],
+  dailyTotal: 0,
+  getCookies: function(min,max){
+    this.cookieNum = `${randomCustomerCalc(23-65)} cookies`;
+    for(let i = 0; i < hours.length; i++){
+      let customer = Math.floor(Math.random() * (max - min + 1) + min);
+      this.randomCustomer.push(customer);
+      console.log(customer);
+    }
+  },
 
-// You're done! Submit the link to the repo following the instructions in Canvas. Or, try out the stretch goal below...
+  calcTotalCookiePerHour: function(){
+    this.getCookies(this.minCust, this.maxCust);
+    randomCustomerCalc();
+    for(let i = 0; i < hours.length; i++){
+      let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookieBought);
+      this.cookiesBought.push(totalCookie);
+      console.log(this.cookiesBought);
+      this.dailyTotal += totalCookie;
+    }
+    console.log(this.dailyTotal, 'total');
+  },
 
-// Don't forget to create a new branch for your work on the next question, if you attempt it.
+  render: function(){
+    this.calcTotalCookiePerHour();
 
-/////////////////////////////////////
-/* STRETCH GOAL: Problem 6
-Write a function called multiplyAnyArray() that takes an array of numbers of any length as its argument and returns an array whose first element is the product of those numbers, and the second element is a string that EXACTLY follows this example and concatenates a message using the arguments that were passed into the function:
+    // ***** DOM MANIPULATION *****
 
-"The numbers 1,2,3,4,5 have a product of 120."
+    // create element
+    let articleElem = document.createElement('article');
 
-IMPORTANT DETAIL: You may not use the arithmetic operator * in this function. To do multiplication, use your multiply() function that you've already created. You're going to have to be resourceful to figure out how to do this. However, you may continue to use the + operator for string concatenation.
+    // add it to the dom
+    storeSection.appendChild(articleElem);
 
-This function should be dynamic, accepting an array of any length.
+    let h2Elem = document.createElement('h2');
+    h2Elem.textContent = this.name;
+    console.log(h2Elem);
+    articleElem.appendChild(h2Elem);
 
-Test this function by hand in the console to get it working, and when you think it is finished, uncomment the call for the testMultiplyAnyArray() function and see if the test passes.*/
+    // USEFUL FOR LAB
+    let ulElem = document.createElement('ul');
+    articleElem.appendChild(ulElem);
 
-// Write your code here
-let testDynamicArray = [1,2,3,4,5]; //eslint-disable-line
+    for(let i = 0; i < hours.length; i++){
+      let liElem = document.createElement('li');
+      console.log(this.cookieNum);
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
+      ulElem.appendChild(liElem);
+    }
 
-function multiplyAnyArray(dynamicArray) { //eslint-disable-line
+    let totalItem = document.createElement('li');
+    console.log();
+    totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
+    ulElem.appendChild(totalItem);
 
-}
+    let pElem = document.createElement('p');
+    pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
+    articleElem.appendChild(pElem);
+  }
+};
 
-// Here is the test for multiplyArray(); uncomment it to run it
-// testMultiplyAnyArray(testDynamicArray);
+let lima = {
+  name: 'Lima',
+  minCust: 2,
+  maxCust: 16,
+  avgCookieBought: 4.6,
+  cookiesBought: [],
+  randomCustomer: [],
+  dailyTotal: 0,
+  getCookies: function(min,max){
+    this.cookieNum = `${randomCustomerCalc(23-65)} cookies`;
+    for(let i = 0; i < hours.length; i++){
+      let customer = Math.floor(Math.random() * (max - min + 1) + min);
+      this.randomCustomer.push(customer);
+      console.log(customer);
+    }
+  },
 
-// Once you get the test passing, do an a-c-p cycle and synchronize the code between GitHub and your laptop. You're done! Submit the link to the repo following the instructions in Canvas.
+  calcTotalCookiePerHour: function(){
+    this.getCookies(this.minCust, this.maxCust);
+    // randomCustomerCalc();
+    for(let i = 0; i < hours.length; i++){
+      let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookieBought);
+      this.cookiesBought.push(totalCookie);
+      console.log(this.cookiesBought);
+      this.dailyTotal += totalCookie;
+    }
+    console.log(this.dailyTotal, 'total');
+  },
+
+  render: function(){
+    this.calcTotalCookiePerHour();
+
+    // ***** DOM MANIPULATION *****
+
+    // create element
+    let articleElem = document.createElement('article');
+
+    // add it to the dom
+    storeSection.appendChild(articleElem);
+
+    let h2Elem = document.createElement('h2');
+    h2Elem.textContent = this.name;
+    console.log(h2Elem);
+    articleElem.appendChild(h2Elem);
+
+    // USEFUL FOR LAB
+    let ulElem = document.createElement('ul');
+    articleElem.appendChild(ulElem);
+
+    for(let i = 0; i < hours.length; i++){
+      let liElem = document.createElement('li');
+      console.log(this.cookieNum);
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]} cookies`;
+      ulElem.appendChild(liElem);
+    }
+
+    let totalItem = document.createElement('li');
+    console.log();
+    totalItem.textContent = `Total: ${this.dailyTotal} cookies`;
+    ulElem.appendChild(totalItem);
+
+    let pElem = document.createElement('p');
+    pElem.alt = `${this.name} has an average of ${this.customerNum} per hour.`;
+    articleElem.appendChild(pElem);
+  }
+};
+
+// ********** EXECUTABLE CODE **********
+
+seattle.calcTotalCookiePerHour();
+seattle.render();
+console.log(seattle);
+
+tokyo.calcTotalCookiePerHour();
+tokyo.render();
+console.log(tokyo);
+
+dubai.calcTotalCookiePerHour();
+dubai.render();
+console.log(dubai);
+
+paris.calcTotalCookiePerHour();
+paris.render();
+console.log(paris);
+
+lima.calcTotalCookiePerHour();
+lima.render();
+console.log(lima);
