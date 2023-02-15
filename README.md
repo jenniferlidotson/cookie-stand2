@@ -1,34 +1,23 @@
-# Lab: Fun with Functions
+# LAB - 07
 
-## Problem Domain
+## Project Name: Cookie Stand Part 2
 
-Today in lab you will create your own repo using the [code-201-lab5a Template Repo](https://github.com/codefellows/code-201-lab5a){:target="_blank"}, and then create solutions to some code problems such that your solutions pass the included tests.
+- My friend Pat has come up with a business idea by combining his love for sweets and his passion for healthy ecosystems. Pat has developed a recipe for a coffee-time confection called Salmon Cookies. These cookies made into the shape of a salmon and are suitable for both humans and salmon to enjoy.
 
-## Instructions
+- Pat needs some help with the branding of the business, as well as some help with internal data management for the company, and has enlisted my assistance because of my extensive and proven work in developing web applications.
 
-You are being given starter code for today, in the `index.html` and `app.js` files inside of this directory. The success of your code will be determined by whether it passes tests that are in the `tests.js` file. You do not need to do anything with `tests.js`, though you should take a look at it to see how it works.
+- Pat’s Salmon Cookies, soon with franchises internationally, needs a proof of concept application to calculate the number of cookies each location must make every day so that it can manage its supplies inventory and baking schedule. The number of cookies to make depends on the hours of operation (6:00 AM to 8:00 PM for all locations) and a few factors unique to each location
 
-Steps to create your repo using the template:
-  1. Click the green `Use this template` button
-  1. Name your repo
-  1. Click the green `Create repository from template` button
+- Because we are early in the life of this business, we will need to build an application that is adaptable. Pat will need to be able to add and remove locations from the daily projections report, and Pat will also need to be able to easily modify the input numbers for each location based on day of the week, special events, and other factors. Pat would like to see these numbers with nice formatting in a web application.
 
-Here are a couple of things to keep in mind:
+- Pat needs me to take a leading role in doing the design work and construction of a public-facing page, too. The logo image is already picked out (below), but Pat is requesting my assistance in the design of the documents, color scheme, fonts, and any additional images for the public facing site.
 
-* Create a new branch for each code problem, and merge each branch into *main* on GitHub (and then pull back into main on your laptop!) when the problem is completed. Do the problems in order. Don't forget to pull the updated main branch from GitHub into your local main branch each time you merge a pull request, then make a new branch from main for the next problem.
-* Place no function calls in your code, unless inside of another function. Everything should be run by hand from the console. This is to give you additional practice using the console and practice efficient app-switching processes.
+## Author: Jennifer Dotson
 
-* Although this is an individual lab assignment, do feel free to collaborate and work in pairs or groups.
+## Salmon Cookie Logo
 
-## Resources
+![Salmon Cookie Logo](img/salmon.png)
 
-This lab will have starter code provided. Work with your instructor directly to gain access to this code.
+## Lighthouse Accessibility Report
 
-### Submission Instructions
-
-Make sure your *main* branch is up to date with your most recent code. 
-- In the submission area, paste a link to your GitHub repo for this project.
-- Add a comment to this Canvas submission with answers to the following questions.
-  - How did this go, overall?
-  - What observations or questions do you have about what you've learned so far?
-  - How long did it take you to complete this assignment? And, before you started, how long did you think it would take you to complete this assignment?
+![Lighthouse Accessibility Report](img/accessibility.png)
