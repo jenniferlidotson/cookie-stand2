@@ -32,6 +32,9 @@ Store.prototype.getCookies = function () {
 
 Store.prototype.calcTotalCookiePerHour = function () {
   this.getCookies(this.minCust, this.maxCust);
+
+  // Create a variable to store daily total
+
   for (let i = 0; i < hours.length; i++) {
     let totalCookie = Math.round(this.randomCustomer[i] * this.avgCookiesBought);
     console.log(typeof (this.randomCustomer[i]));
@@ -63,7 +66,12 @@ Store.prototype.render = function () {
     let cookieData = document.createElement('td');
     cookieData.textContent = this.cookiesBought[i];
     headerRow.appendChild(cookieData);
+
   }
+  let dailyTotal = document.createElement('td');
+  dailyTotal.textContent = this.dailyTotal;
+  headerRow.appendChild(dailyTotal);
+
 };
 
 function header() {
@@ -74,13 +82,22 @@ function header() {
     let headerTime = document.createElement('th');
     headerTime.textContent = hours[i];
     headerRow.appendChild(headerTime);
+
   }
+
+  let headerDailyTotal = document.createElement('th');
+  headerDailyTotal.textContent = 'Daily Total';
+  headerRow.appendChild(headerDailyTotal);
+
 }
 
 function footer() {
   let footer = document.createElement('th');
   footer.textContent = 'Totals';
   saleTable.appendChild(footer);
+
+  let grandTotal = 0;
+
   for (let i = 0; i < hours.length; i++) {
     let totals = 0;
     for (let j = 0; j < storeObjects.length; j++) {
@@ -91,7 +108,14 @@ function footer() {
     let hourlyTotals = document.createElement('td');
     hourlyTotals.textContent = totals;
     saleTable.appendChild(hourlyTotals);
+    grandTotal += totals;
+
   }
+
+  let dailyTotals = document.createElement('td');
+  dailyTotals.textContent = grandTotal;
+  saleTable.appendChild(dailyTotals);
+
 }
 
 // ********** EXECUTABLE CODE **********
@@ -117,6 +141,7 @@ function renderAll() {
 
 renderAll();
 footer();
+
 // 'use strict';
 
 // // ********** GLOBAL **************
